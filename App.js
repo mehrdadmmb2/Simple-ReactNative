@@ -1,70 +1,119 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, StatusBar} from 'react-native';
+import {Platform, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {Text} from "react-native-elements";
+import VideoItem from './component/videoitem';
 
-
-const instructions = Platform.select({
-    ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-    android:
-        'Double tap R on your keyboard to reload,\n' +
-        'Shake or press menu button for dev menu',
-});
-
-type Props = {};
 export default class App extends Component<Props> {
+
+    // state = {
+    //     textValue: "نمایش متن"
+    // };
+    //
+    // _onPressButton() {
+    //     // Alert.alert("fdfdf");
+    //
+    //     DialogProgress.show(options);
+    //     fetch('https://www.aparat.com/etc/api/categoryVideos/cat/7/perpage/9', {
+    //         method: 'GET'
+    //     }).then((response) => response.json())
+    //         .then((responseJson) => {
+    //             DialogProgress.hide();
+    //             return Alert.alert("Suuceess: " + responseJson.categoryvideos[1].title);
+    //         })
+    //         .catch((error) => {
+    //             DialogProgress.hide();
+    //             Alert.alert("Error: " + error.toString());
+    //         });
+    // }
+
+
     render() {
         return (
-            <View>
-                <StatusBar backgroundColor="#4CAF50" barStyle="light-content"/>
+            <View style={style.container}>
 
-                <View style={style.navbar}>
-                    <Text style={style.navbarText}>Android browser</Text>
-                    <Text style={style.navbarButton}>Search</Text>
+                <View style={style.navBar}>
+                    <Image source={require('./images/ytlogo.png')} style={{width: 98, height: 22}}/>
+                    <View style={style.rightNav}>
+                        <TouchableOpacity>
+                            <Icon style={style.navItem} name="search" size={25}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <Icon style={style.navItem} name="account-circle" size={25}/>
+                        </TouchableOpacity>
+                    </View>
+
+
                 </View>
 
-                <View>
-                    <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                        galley of type and scrambled it to make a type specimen book. It has survived not only five
-                        centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It
-                        was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                        passages, and more recently with desktop publishing software like Aldus PageMaker including
-                        versions of Lorem Ipsum.
-
-                    </Text>
+                <View style={style.body}>
+                    <VideoItem />
                 </View>
 
+                <View style={style.tabBar}>
+
+                    <TouchableOpacity style={style.tabItem}>
+                        <Icon name="home" size={25}/>
+                        <Text style={style.tabTitle}>Home</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={style.tabItem}>
+                        <Icon name="whatshot" size={25}/>
+                        <Text style={style.tabTitle}>Trending</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={style.tabItem}>
+                        <Icon name="subscriptions" size={25}/>
+                        <Text style={style.tabTitle}>Subscriptions</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={style.tabItem}>
+                        <Icon name="folder" size={25}/>
+                        <Text style={style.tabTitle}>Library</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
 }
-
 var style = StyleSheet.create({
-    navbar: {
-        backgroundColor: '#4CAF50',
-        color: '#fff',
-        flexDirection: 'row',
-        paddingTop: 16,
-        paddingBottom: 16
-    },
-    navbarText: {
-        color: '#fff',
-        fontSize: 15,
-        fontWeight: 'bold',
-        textAlign: 'center',
+    container: {
         flex: 1
     },
-
-    navbarButton: {
-        width: 50,
-        textAlign: 'center',
+    navBar: {
+        height: 56,
+        backgroundColor: 'white',
+        elevation: 3,
+        paddingHorizontal: 16,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    rightNav: {
+        flexDirection: 'row'
+    },
+    navItem: {
+        marginLeft: 16
+    },
+    tabBar: {
+        backgroundColor: 'white',
+        height: 60,
+        borderTopWidth: 0.5,
+        borderColor: '#d9d9d9',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    body: {
+        flex: 1
+    },
+    tabItem: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    tabTitle: {
+        fontSize: 11,
+        color: '#9f9f9f',
+        paddingTop: 4
     }
 });
 

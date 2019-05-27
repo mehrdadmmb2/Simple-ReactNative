@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, View, Image, TouchableOpacity, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Text} from "react-native-elements";
 import VideoItem from './component/videoitem';
+import data from './data.json';
+import {Fonts} from "./src/utils/Fonts";
 
 export default class App extends Component<Props> {
 
@@ -27,7 +29,6 @@ export default class App extends Component<Props> {
     //         });
     // }
 
-
     render() {
         return (
             <View style={style.container}>
@@ -42,34 +43,37 @@ export default class App extends Component<Props> {
                             <Icon style={style.navItem} name="account-circle" size={25}/>
                         </TouchableOpacity>
                     </View>
-
-
                 </View>
 
                 <View style={style.body}>
-                    <VideoItem />
+                    <FlatList
+                        data={data.categoryvideos}
+                        renderItem={(video) => <VideoItem video={video.item}/>}
+                        keyExtractor={(item) => item.id}
+                        ItemSeparatorComponent={() => <View style={{height: 0.5, backgroundColor: '#cccccc'}}/>}
+                    />
                 </View>
 
                 <View style={style.tabBar}>
 
                     <TouchableOpacity style={style.tabItem}>
                         <Icon name="home" size={25}/>
-                        <Text style={style.tabTitle}>Home</Text>
+                        <Text style={style.tabTitle}>خانه</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={style.tabItem}>
                         <Icon name="whatshot" size={25}/>
-                        <Text style={style.tabTitle}>Trending</Text>
+                        <Text style={style.tabTitle}>پربازدید</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={style.tabItem}>
                         <Icon name="subscriptions" size={25}/>
-                        <Text style={style.tabTitle}>Subscriptions</Text>
+                        <Text style={style.tabTitle}>دنبال شده</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={style.tabItem}>
                         <Icon name="folder" size={25}/>
-                        <Text style={style.tabTitle}>Library</Text>
+                        <Text style={style.tabTitle}>سوابق</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -78,7 +82,7 @@ export default class App extends Component<Props> {
 }
 var style = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     navBar: {
         height: 56,
@@ -104,7 +108,7 @@ var style = StyleSheet.create({
         justifyContent: 'space-around'
     },
     body: {
-        flex: 1
+        flex: 1,
     },
     tabItem: {
         alignItems: 'center',
@@ -113,7 +117,9 @@ var style = StyleSheet.create({
     tabTitle: {
         fontSize: 11,
         color: '#9f9f9f',
-        paddingTop: 4
+        paddingTop: 4,
+        fontFamily:Fonts.irans_sans,
+    
     }
 });
 
